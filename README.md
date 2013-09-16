@@ -1,4 +1,4 @@
-jpress
+Jpress
 ======
 
-A Jekyll Boilerplate
+A Jekyll Boilerplate for blogs and projects pages.
