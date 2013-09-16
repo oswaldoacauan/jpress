@@ -1,7 +1,23 @@
 {
   "name": "jpress",
-  "version": "0.0.0",
-  "description": "JPress - A Jekyll Boilerplate",
+  "version": "0.0.1",
+  "description": "JPress a Jekyll Boilerplate for blogs and pages.",
+  "author": {
+      "name": "Oswaldo Acauan",
+      "email": "hello@oswaldoacauan.com",
+      "web": "http://oswaldoacauan.com"
+  },
+  "license": "MIT",
+  "repository": {
+      "type": "git",
+      "url": "git@github.com:oswaldoacauan/jpress.git"
+  },
+  "bugs": {
+      "url": "https://github.com/oswaldoacauan/jpress/issues"
+  },
+  "keywords": [
+      "jpress", "jekyll", "blog", "page"
+  ],
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
