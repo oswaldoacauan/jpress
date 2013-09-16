@@ -1,0 +1,8 @@
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<link rel="start" href="{{ site.baseurl }}" title="{{ site.title }}">
+{% if page.previous %}
+  <link rel="prev" href="{{ page.previous.url }}" title="{{ page.previous.title }}">
+{% endif %}
+{% if page.next %}
+  <link rel="next" href="{{ page.next.url }}" title="{{ page.next.title }}">
+{% endif %}

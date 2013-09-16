@@ -1,0 +1,19 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+  oswaldoacauan -- http://twitter.com/oswaldoacauan
+
+# TECHNOLOGY COLOPHON
+
+  Jekyll
+  Sass and Compass
+  PureCSS
+  HTML5 ★ Boilerplate
+  jQuery, Modernizr
+
+# BUILD WITH
+
+  Sublime Text 2
+  <3

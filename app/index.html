@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<section class="home posts">
+  <h1>Blog Posts</h1>
+  {% for post in site.posts %}
+    <article>
+      <time>{{ post.date | date_to_string }}</time>
+      &raquo; <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title | titlecase }}</a></article>
+  {% endfor %}
+</section>
