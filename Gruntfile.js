@@ -1,4 +1,3 @@
-// Generated on 2013-08-02 using generator-jekyllrb 0.3.5. Yo Jekyll!
 'use strict';
 var liveReloadPort = 35729;
 var lrSnippet = require('connect-livereload')({port: liveReloadPort});
@@ -373,13 +372,6 @@ module.exports = function (grunt) {
     ]);
   });
 
-  // No real tests yet. Add your own.
-  // grunt.registerTask('test', [
-  //   'clean:server',
-  //   'concurrent:test',
-  //   'connect:test'
-  // ]);
-
   grunt.registerTask('report', [
     'clean:server',
     'compass:server',
@@ -409,5 +401,10 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'report',
     'build'
+  ]);
+
+  grunt.registerTask('test', [
+    'report',
+    'jekyll:dist'
   ]);
 };

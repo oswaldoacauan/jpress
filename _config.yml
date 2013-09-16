@@ -72,9 +72,10 @@ markdown: redcarpet
 # Use Pygments to highlight code blocks
 pygments: true
 
+# JPress configs
+# ===========================
 
-
-# Jekyll plugins configs
+# Plugins configs
 # ===========================
 
 pages: ./_pages

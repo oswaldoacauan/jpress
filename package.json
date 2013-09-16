@@ -1,7 +1,7 @@
 {
-  "name": "oswaldoacauangithubio",
+  "name": "jpress",
   "version": "0.0.0",
-  "description": "Yeoman / Grunt workflow for oswaldoacauan.github.io",
+  "description": "JPress - A Jekyll Boilerplate",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -31,5 +31,8 @@
   },
   "engines": {
     "node": ">=0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test --verbose"
   }
 }
