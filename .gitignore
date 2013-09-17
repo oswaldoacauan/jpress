@@ -19,6 +19,7 @@ Thumbs.db
 *.swn
 *.swo
 *.swp
+*.lock
 ._*
 *~
 
@@ -32,8 +33,7 @@ Thumbs.db
 *.tar
 *.zip
 
-# Ignore for Yeoman-Jekyll projects #
+# Ignore for JPress project #
 app/_bower_components
 dist
 node_modules
-.tmp
