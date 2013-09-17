@@ -1,13 +1,16 @@
 {
-  "name": "jpress",
+  "name": "JPress",
   "version": "0.0.1",
-  "description": "JPress a Jekyll Boilerplate for blogs and pages.",
+  "title": "JPress a Jekyll Boilerplate for blogs and pages",
+  "description": "JPress a Jekyll Boilerplate for blogs and pages",
+  "url" : "http://getjpress.com",
+  "copyright": "2013",
+  "license": "MIT",
   "author": {
     "name": "Oswaldo Acauan",
     "email": "hello@oswaldoacauan.com",
     "web": "http://oswaldoacauan.com"
   },
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@github.com:oswaldoacauan/jpress.git"
@@ -30,6 +33,7 @@
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-compass": "~0.5.0",
+    "grunt-contrib-compress": "~0.5.2",
     "grunt-contrib-connect": "~0.5.0",
     "grunt-contrib-csslint": "~0.1.2",
     "grunt-contrib-cssmin": "~0.6.1",
@@ -46,8 +50,7 @@
     "grunt-svgmin": "~0.2.0",
     "grunt-usemin": "~0.1.12",
     "connect-livereload": "~0.3.0",
-    "matchdep": "~0.1.2",
-    "grunt-contrib-compress": "~0.5.2"
+    "matchdep": "~0.1.2"
   },
   "engines": {
     "node": ">=0.8.0"

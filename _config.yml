@@ -32,7 +32,7 @@ baseurl: /
 # Source folder
 source: .
 
-# Destination folder
+# Destination folder, dont forget to change on Gruntfile.js too!
 destination: ./dist
 
 # Plugins folder

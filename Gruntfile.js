@@ -1,51 +1,66 @@
 'use strict';
-var liveReloadPort = 35729;
-var lrSnippet = require('connect-livereload')({port: liveReloadPort});
+var LIVERELOAD_PORT = 35729;
+var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
-var yeomanConfig = {
+var config = {
   app: 'app',
   dist: 'dist'
 };
 
-// Directory reference:
-//   css: css
-//   compass: _scss
-//   javascript: js
-//   images: image
-//   fonts: fonts
+/**
+ *
+ * Directory reference
+ * ======================
+ * css: css
+ * compass: _scss
+ * javascript: js
+ * images: image
+ * fonts: fonts
+ *
+ */
 
 module.exports = function (grunt) {
 
   // Configuration
   grunt.initConfig({
-    yeoman: yeomanConfig,
-
+    jpress: config,
+    pkg: grunt.file.readJSON('package.json'),
+    tag: {
+      banner: '/*!\n' +
+              ' * <%= pkg.name %>\n' +
+              ' * <%= pkg.title %>\n' +
+              ' * <%= pkg.url %>\n' +
+              ' * @author <%= pkg.author.name %> <<%= pkg.author.email %>>\n' +
+              ' * @version <%= pkg.version %>\n' +
+              ' * Copyright <%= pkg.copyright %>. <%= pkg.license %> licensed.\n' +
+              ' */\n'
+    },
     watch: {
       compass: {
-        files: ['<%= yeoman.app %>/_scss/**/*.{scss,sass}'],
+        files: ['<%= jpress.app %>/_scss/**/*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer:server']
       },
       prefixCss: {
-        files: ['<%= yeoman.app %>/css/**/*.css'],
+        files: ['<%= jpress.app %>/css/**/*.css'],
         tasks: ['copy:stageCss', 'autoprefixer:server']
       },
       jekyll: {
-        files: ['<%= yeoman.app %>/**/*.{html,yml,md,mkd,markdown}',
+        files: ['<%= jpress.app %>/**/*.{html,yml,md,mkd,markdown}',
                 '_config.yml',
-                '!<%= yeoman.app %>/_bower_components'],
+                '!<%= jpress.app %>/_bower_components'],
         tasks: ['jekyll:server']
       },
       livereload: {
         options: {
-          livereload: liveReloadPort
+          livereload: LIVERELOAD_PORT
         },
         files: [
           '.jekyll/**/*.html',
           '.tmp/css/**/*.css',
-          '{.tmp,<%= yeoman.app %>}/<%= js %>/**/*.js',
-          '<%= yeoman.app %>/image/**/*.{gif,jpg,jpeg,png,svg,webp}'
+          '{.tmp,<%= jpress.app %>}/<%= js %>/**/*.js',
+          '<%= jpress.app %>/image/**/*.{gif,jpg,jpeg,png,svg,webp}'
         ]
       }
     },
@@ -62,7 +77,7 @@ module.exports = function (grunt) {
               lrSnippet,
               mountFolder(connect, '.tmp'),
               mountFolder(connect, '.jekyll'),
-              mountFolder(connect, yeomanConfig.app)
+              mountFolder(connect, config.app)
             ];
           }
         }
@@ -81,7 +96,7 @@ module.exports = function (grunt) {
         options: {
           middleware: function (connect) {
             return [
-              mountFolder(connect, yeomanConfig.dist)
+              mountFolder(connect, config.dist)
             ];
           }
         }
@@ -100,8 +115,8 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
-            '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*'
+            '<%= jpress.dist %>/*',
+            '!<%= jpress.dist %>/.git*'
           ]
         }]
       },
@@ -112,20 +127,20 @@ module.exports = function (grunt) {
         // If you're using global Sass gems, require them here, e.g.:
         // require: ['singularity', 'jacket'],
         bundleExec: true,
-        sassDir: '<%= yeoman.app %>/_scss',
+        sassDir: '<%= jpress.app %>/_scss',
         cssDir: '.tmp/css',
-        imagesDir: '<%= yeoman.app %>/image',
-        fontsDir: '<%= yeoman.app %>/fonts',
-        javascriptsDir: '<%= yeoman.app %>/js',
+        imagesDir: '<%= jpress.app %>/image',
+        fontsDir: '<%= jpress.app %>/fonts',
+        javascriptsDir: '<%= jpress.app %>/js',
         relativeAssets: false,
         httpImagesPath: '/image',
         httpGeneratedImagesPath: '/image/generated',
         outputStyle: 'expanded',
-        raw: 'asset_cache_buster :none \nextensions_dir = "<%= yeoman.app %>/_bower_components"\n'
+        raw: 'asset_cache_buster :none \nextensions_dir = "<%= jpress.app %>/_bower_components\n'
       },
       dist: {
         options: {
-          generatedImagesDir: '<%= yeoman.dist %>/image/generated'
+          generatedImagesDir: '<%= jpress.dist %>/image/generated'
         }
       },
       server: {
@@ -142,9 +157,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>/css',
+          cwd: '<%= jpress.dist %>/css',
           src: '**/*.css',
-          dest: '<%= yeoman.dist %>/css'
+          dest: '<%= jpress.dist %>/css'
         }]
       },
       server: {
@@ -159,11 +174,11 @@ module.exports = function (grunt) {
     jekyll: {
       options: {
         bundleExec: true,
-        src : '<%= yeoman.app %>'
+        src : '<%= jpress.app %>'
       },
       dist: {
         options: {
-          dest: '<%= yeoman.dist %>',
+          dest: '<%= jpress.dist %>',
           config: '_config.yml,_config.build.yml'
         }
       },
@@ -180,14 +195,14 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '{.tmp,<%= yeoman.app %>}/js/**/*.js',
+        '{.tmp,<%= jpress.app %>}/js/**/*.js',
         'test/spec/**/*.js',
-        '!<%= yeoman.app %>/js/vendor/**/*',
-        '!<%= yeoman.app %>/_bower_components/**/*'
+        '!<%= jpress.app %>/js/vendor/**/*',
+        '!<%= jpress.app %>/_bower_components/**/*'
       ],
       report: [
-        '{.tmp,<%= yeoman.app %>}/js/**/*.js',
-        '!<%= yeoman.app %>/js/vendor/**/*'
+        '{.tmp,<%= jpress.app %>}/js/**/*.js',
+        '!<%= jpress.app %>/js/vendor/**/*'
       ]
     },
     csscss: {
@@ -202,8 +217,8 @@ module.exports = function (grunt) {
       },
       // Add files to be tested here
       report: {
-       src: ['<%= yeoman.app %>/css/**/*.css',
-             '<%= yeoman.app %>/_scss/**/*.scss']
+       src: ['<%= jpress.app %>/css/**/*.css',
+             '<%= jpress.app %>/_scss/**/*.scss']
       }
     },
     csslint: {
@@ -211,7 +226,7 @@ module.exports = function (grunt) {
         csslintrc: '.csslintrc'
       },
       report: {
-        src: ['{.tmp,<%= yeoman.app %>}/css/**/*.css']
+        src: ['{.tmp,<%= jpress.app %>}/css/**/*.css']
       }
     },
     // UseminPrepare will only scan one page for usemin blocks. If you have
@@ -219,17 +234,17 @@ module.exports = function (grunt) {
     // page (hackery!) and point this task there.
     useminPrepare: {
       options: {
-        dest: '<%= yeoman.dist %>'
+        dest: '<%= jpress.dist %>'
       },
-      html: '<%= yeoman.dist %>/index.html'
+      html: '<%= jpress.dist %>/index.html'
     },
     usemin: {
       options: {
-          basedir: '<%= yeoman.dist %>',
-          dirs: ['<%= yeoman.dist %>/**/*']
+          basedir: '<%= jpress.dist %>',
+          dirs: ['<%= jpress.dist %>/**/*']
       },
-      html: ['<%= yeoman.dist %>/**/*.html'],
-      css: ['<%= yeoman.dist %>/css/**/*.css']
+      html: ['<%= jpress.dist %>/**/*.html'],
+      css: ['<%= jpress.dist %>/css/**/*.css']
     },
     htmlmin: {
       dist: {
@@ -242,20 +257,31 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>',
+          cwd: '<%= jpress.dist %>',
           src: '**/*.html',
-          dest: '<%= yeoman.dist %>'
+          dest: '<%= jpress.dist %>'
         }]
       }
     },
     // Usemin adds files to concat
-    concat: {},
+    concat: {
+      options: {
+        stripBanners: true,
+        nonull: true,
+        banner: '<%= tag.banner %>'
+      }
+    },
     // Usemin adds files to uglify
-    uglify: {},
+    uglify: {
+      options: {
+        banner: '<%= tag.banner %>'
+      }
+    },
     // Usemin adds files to cssmin
     cssmin: {
       dist: {
         options: {
+          anner: '<%= tag.banner %>',
           report: 'gzip'
         }
       }
@@ -267,9 +293,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>',
+          cwd: '<%= jpress.dist %>',
           src: '**/*.{jpg,jpeg,png}',
-          dest: '<%= yeoman.dist %>'
+          dest: '<%= jpress.dist %>'
         }]
       }
     },
@@ -277,9 +303,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>',
+          cwd: '<%= jpress.dist %>',
           src: '**/*.svg',
-          dest: '<%= yeoman.dist %>'
+          dest: '<%= jpress.dist %>'
         }]
       }
     },
@@ -289,9 +315,9 @@ module.exports = function (grunt) {
           mode: 'gzip'
         },
         expand: true,
-        cwd: '<%= yeoman.dist %>',
+        cwd: '<%= jpress.dist %>',
         src: ['**/*.{svg,js,css}'],
-        dest: '<%= yeoman.dist %>'
+        dest: '<%= jpress.dist %>'
       }
     },
     copy: {
@@ -299,7 +325,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= yeoman.app %>',
+          cwd: '<%= jpress.app %>',
           src: [
             // Jekyll moves all html and text files. Usemin moves css and js
             // files with concat. Add other files and patterns your site
@@ -311,7 +337,7 @@ module.exports = function (grunt) {
             'image/**/*',
             'fonts/**/*'
           ],
-          dest: '<%= yeoman.dist %>'
+          dest: '<%= jpress.dist %>'
         }]
       },
       // Copy css into .tmp directory for processing
@@ -319,7 +345,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= yeoman.app %>/css',
+          cwd: '<%= jpress.app %>/css',
           src: '**/*.css',
           dest: '.tmp/css'
         }]
@@ -332,10 +358,10 @@ module.exports = function (grunt) {
       dist: {
         files: {
           src: [
-            '<%= yeoman.dist %>/js/**/*.js',
-            '<%= yeoman.dist %>/css/**/*.css',
-            '<%= yeoman.dist %>/image/**/*.{gif,jpg,jpeg,png,svg,webp}',
-            '<%= yeoman.dist %>/fonts/**/*.{eot*,svg,ttf,woff}'
+            '<%= jpress.dist %>/js/**/*.js',
+            '<%= jpress.dist %>/css/**/*.css',
+            '<%= jpress.dist %>/image/**/*.{gif,jpg,jpeg,png,svg,webp}',
+            '<%= jpress.dist %>/fonts/**/*.{eot*,svg,ttf,woff}'
           ]
         }
       }
