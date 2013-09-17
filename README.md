@@ -1,4 +1,4 @@
-JPress [![Build Status](https://travis-ci.org/oswaldoacauan/jpress.png)](https://travis-ci.org/oswaldoacauan/jpress)[![devDependency Status](https://david-dm.org/oswaldoacauan/jpress/dev-status.png)](https://david-dm.org/oswaldoacauan/jpress#info=devDependencies)
+JPress [![Build Status](https://travis-ci.org/oswaldoacauan/jpress.png)](https://travis-ci.org/oswaldoacauan/jpress) [![devDependency Status](https://david-dm.org/oswaldoacauan/jpress/dev-status.png)](https://david-dm.org/oswaldoacauan/jpress#info=devDependencies)
 ======
 A [Jekyll](jekyllrb.com) Boilerplate for blogs and pages.
 
