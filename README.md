@@ -2,8 +2,6 @@ JPress [![Build Status](https://travis-ci.org/oswaldoacauan/jpress.png)](https:/
 ======
 A [Jekyll](jekyllrb.com) Boilerplate for blogs and pages.
 
----
-
 What comes with JPress?
 ------
 - **[Grunt](http://gruntjs.com)** with three tasks *server*, *test* and *default* and the following plugins
