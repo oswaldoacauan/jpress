@@ -5,7 +5,7 @@
 # _config.build.yml to set custom overrides for `grunt build`.
 
 
-# Blog configs
+# Project configs
 # ===========================
 
 name: jpress
