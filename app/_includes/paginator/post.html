@@ -1,0 +1,14 @@
+<article class="post" itemprop="articleBody">
+    <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date_to_long_string }}</time>
+    <a class="post-category" href="http://tableless.com.br/?cat=522">{{ page.categories }}</a>
+    <h1 class="post-title" itemprop="name">
+      <a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a>
+    </h1>
+    {% if page.description %}
+      <p class="post-headline" itemprop="headline">{{ page.description }}</p>
+    {% endif %}
+    <span class="post-author">
+      By
+      <a href="{{ site.author.twitter }}" rel="author"> <strong>{{ site.author.name }}</strong></a>
+    </span>
+</article>

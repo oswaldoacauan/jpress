@@ -1,0 +1,10 @@
+{% if site.author.twitter %}
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@{{ site.author.twitter }}">
+  <meta name="twitter:creator" content="@{{ site.author.twitter }}">
+  <meta name="twitter:title" content="{{ title | strip_html | condense_spaces }}">
+  <meta name="twitter:description" content="{{ description | strip_html | condense_spaces | truncate:150 }}">
+  {% if image %}
+    <meta name="twitter:image" content="{{ image }}">
+  {% endif %}
+{% endif %}

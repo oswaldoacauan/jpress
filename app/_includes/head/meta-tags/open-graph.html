@@ -1,0 +1,8 @@
+<meta property="og:url" content="{{ site.url }}{{ page.url }}"/>
+<meta property="og:site_name" content="{{ site.title }}"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="{{ title | strip_html | condense_spaces }}">
+<meta property="og:description" content="{{ description | strip_html | condense_spaces | truncate:150 }}">
+{% if image %}
+  <meta name="og:image" content="{{ image }}">
+{% endif %}
