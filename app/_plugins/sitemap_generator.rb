@@ -34,7 +34,7 @@
 # Distributed Under A Creative Commons License
 #   - http://creativecommons.org/licenses/by/3.0/
 #
-# Modified for Octopress by John W. Long
+# Modified for JPress
 #
 require 'rexml/document'
 require 'fileutils'
@@ -66,7 +66,7 @@ module Jekyll
     end
 
     def location_on_server
-      "#{site.config['url']}#{url}"
+      "#{site.config['url']}#{site.config['baseurl']}#{url}"
     end
   end
 
@@ -78,7 +78,7 @@ module Jekyll
     end
 
     def location_on_server
-      location = "#{site.config['url']}#{@dir}#{url}"
+      location = "#{site.config['url']}#{site.config['baseurl']}#{@dir}#{url}"
       location.gsub(/index.html$/, "")
     end
   end

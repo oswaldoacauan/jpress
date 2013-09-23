@@ -1,20 +1,17 @@
+<meta name="description" content="{{ description | strip_html | condense_spaces | truncate:150 }}">
+{% if keywords %}
+  <meta name="keywords" content="{{ page.keywords | strip_html | condense_spaces }}">
+{% endif %}
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta property="og:url" content="{{ site.url }}{{ page.url }}"/>
-<meta property="og:site_name" content="{{ site.title }}"/>
-<meta property="og:type" content="blog"/>
-
-<meta name="twitter:card" content="summary">
-
-{% if site.author.twitter %}
-  <meta name="twitter:site" content="@{{ site.author.twitter }}">
-  <meta name="twitter:creator" content="@{{ site.author.twitter }}">
-{% endif %}
+{% include head/meta-tags/open-graph.html %}
+{% include head/meta-tags/twitter-card.html %}
 
 {% if site.google_webmaster %}
   <meta name="google-site-verification" content="{{ site.google_webmaster }}">
@@ -22,43 +19,4 @@
 
 {% if site.fb_insights %}
   <meta property="fb:admins" content="{{ site.fb_insights }}">
-{% endif %}
-
-{% capture title %}{% if page.title %}{{ page.title | titlecase }} - {% endif %}{{ site.title }}{% endcapture %}
-{% if title %}
-  <title>{{ title | strip_html | condense_spaces }}</title>
-  <meta property="og:title" content="{{ title | strip_html | condense_spaces }}">
-  <meta name="twitter:title" content="{{ title | strip_html | condense_spaces }}">
-{% endif %}
-
-{% if page.keywords %}
-  {% assign keywords = page.keywords %}
-{% else %}
-  {% assign keywords = site.keywords %}
-{% endif %}
-{% if keywords %}
-  <meta name="keywords" content="{{ page.keywords | strip_html | condense_spaces }}">
-{% endif %}
-
-{% if page.description %}
-  {% assign description = page.description %}
-{% elsif site.description %}
-  {% assign description = site.description %}
-{% else %}
-  {% capture description %}{{ content | raw_content }}{% endcapture %}
-{% endif %}
-{% if description %}
-  <meta name="description" content="{{ description | strip_html | condense_spaces | truncate:150 }}">
-  <meta property="og:description" content="{{ description | strip_html | condense_spaces | truncate:150 }}">
-  <meta name="twitter:description" content="{{ description | strip_html | condense_spaces | truncate:150 }}">
-{% endif %}
-
-{% if page.image %}
-  {% assign image = page.image %}
-{% else %}
-  {% assign image = site.image %}
-{% endif %}
-{% if image %}
-  <meta property="og:image" content="{{ image }}">
-  <meta name="twitter:image" content="{{ image }}">
 {% endif %}

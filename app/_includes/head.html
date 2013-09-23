@@ -1,22 +1,44 @@
+{% capture title %}{% if page.title %}{{ page.title | titlecase }} - {% endif %}{{ site.title }}{% endcapture %}
+
+{% if page.keywords %}
+  {% assign keywords = page.keywords %}
+{% else %}
+  {% assign keywords = site.keywords %}
+{% endif %}
+
+{% if page.description %}
+  {% assign description = page.description %}
+{% elsif site.description %}
+  {% assign description = site.description %}
+{% else %}
+  {% capture description %}{{ content | raw_content }}{% endcapture %}
+{% endif %}
+
+{% if page.image %}
+  {% assign image = page.image %}
+{% else %}
+  {% assign image = site.image %}
+{% endif %}
+
 <meta charset="utf-8">
-<base href="{{ site.baseurl }}">
+<title>{{ title | strip_html | condense_spaces }}</title>
 
 {% include head/meta-tags.html %}
 
-<link href="{{ site.subscribe_rss }}" rel="alternate" title="{{site.title}}" type="application/atom+xml">
+<link href="{{ site.baseurl }}/atom.xml" rel="alternate" title="{{site.title}}" type="application/atom+xml">
 <link href="//fonts.googleapis.com" rel="dns-prefetch">
 <link href="//ajax.googleapis.com" rel="dns-prefetch">
-<link href="/humans.txt" rel="author" type="text/plain">
+<link href="{{ site.baseurl }}/humans.txt" rel="author" type="text/plain">
 
 {% include head/links.html %}
 
-<!-- build:css({app,.tmp}) /css/main.css -->
-<link rel="stylesheet" href="/css/syntax.css">
-<link rel="stylesheet" href="/css/main.css">
+<!-- build:css({app,.tmp}) {{ site.baseurl }}/css/main.css -->
+<link rel="stylesheet" href="{{ site.baseurl }}/css/syntax.css">
+<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
 <!-- endbuild -->
 
-<!-- build:js /js/head-scripts.js -->
-<script src="_bower_components/modernizr/modernizr.js"></script>
+<!-- build:js {{ site.baseurl }}/js/head-scripts.js -->
+<script src="{{ site.baseurl }}/_bower_components/modernizr/modernizr.js"></script>
 <!-- endbuild -->
 
 {% include custom/head.html %}

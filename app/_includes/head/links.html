@@ -1,8 +1,23 @@
-<link rel="canonical" href="{{ site.url }}{{ page.url }}">
-<link rel="start" href="{{ site.baseurl }}" title="{{ site.title }}">
-{% if page.previous %}
-  <link rel="prev" href="{{ page.previous.url }}" title="{{ page.previous.title }}">
+{% if paginator %}
+  {% if paginator.previous_page %}
+    {% capture prev_title %}Page {{ paginator.previous_page }}{% endcapture %}
+    {% assign prev_url = paginator.previous_page_path %}
+  {% endif %}
+  {% if paginator.next_page %}
+    {% capture next_title %}Page {{ paginator.next_page }}{% endcapture %}
+    {% assign next_url = paginator.next_page_path %}
+  {% endif %}
+{% else %}
+  {% assign prev_title = page.previous.title %}
+  {% assign prev_url = page.previous.url %}
+  {% assign next_title = page.next.title %}
+  {% assign next_url = page.next.url %}
 {% endif %}
-{% if page.next %}
-  <link rel="next" href="{{ page.next.url }}" title="{{ page.next.title }}">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<link rel="start" href="{{ site.baseurl }}/" title="{{ site.title }}">
+{% if prev_url %}
+  <link rel="prev" href="{{ site.baseurl }}{{ prev_url }}" title="{{ prev_title }}">
+{% endif %}
+{% if next_url %}
+  <link rel="next" href="{{ site.baseurl }}{{ next_url }}" title="{{ next_title }}">
 {% endif %}

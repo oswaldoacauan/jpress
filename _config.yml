@@ -11,7 +11,7 @@
 name: jpress
 title: JPress
 subtitle: A Jekyll Boilerplate for blogs and pages
-description:
+description: 'A Jekyll Boilerplate for blog and pages'
 # Used on opengraph protocol and twitter cards
 image:
 url: http://getjpress.com
@@ -20,26 +20,19 @@ url: http://getjpress.com
 # Jekyll configs
 # ===========================
 
-# With safe mode enabled any plugin will work
-safe: false
+# The number should be the maximum number of Posts you’d like to be displayed per- page in the generated site.
+paginate: 1
 
-# If publishing to a subdirectory as in http://site.com/project set 'root: /project'
-root: /
+# Page path style
+paginate_path: '/page/:num'
 
-# BaseUrl for links & assets
-baseurl: /
-
-# Source folder
-source: .
+# If publishing to a subdirectory as in http://site.com/project set '/project'
+# else leave it empty. Remember to change 'baseurl' on '_config.build.yml'
+# before run the build task
+baseurl:
 
 # Destination folder, dont forget to change on Gruntfile.js too!
 destination: ./dist
-
-# Plugins folder
-# plugins: ./_plugins
-
-# Layouts folder
-layouts: ./_layouts
 
 # Exclude directories and/or files from the conversion.
 # Grunt moves image files and asset directories.
@@ -74,14 +67,15 @@ markdown: redcarpet
 # Use Pygments to highlight code blocks
 pygments: true
 
+
 # JPress configs
 # ===========================
 
-# Plugins configs
-# ===========================
+# Enable titlecase. Ex: 'This is an awesome post' -> 'This is an Awesome Post'
+titlecase: true
 
-# Social configs
-# ===========================
+# Enable OpenGraph tags
+open_graph: true
 
 # Facebook
 facebook_insights: '100000504340213'
@@ -90,8 +84,11 @@ facebook_insights: '100000504340213'
 google_webmaster: 'DpD9oer8uLmd-1PoX5r7BIBWeC8-ehyz16ZxZXwzA7c'
 google_analitycs: 'UA-35822150-1'
 
-# Disqus Comments
+# Disqus Comments, if `disquis_short_name` is empty comments will be disabled.
 disqus_short_name:
+
+# Disqus Comments, if `share_this` is empty share component will be disabled.
+share_this:
 
 
 # Author configs
@@ -101,5 +98,5 @@ author:
   name: Oswaldo Acauan
   email: oswaldoacauan@gmail.com
   github: oswaldoacauan
-  twitter: oswaldoacauan
+  twitter: oswaldoacauan # If twitter is not empty, twitter cards will be enabled
   gplus: 118319269143668101211

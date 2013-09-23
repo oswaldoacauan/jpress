@@ -5,22 +5,22 @@ layout: nil
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[{{ site.title }}]]></title>
-  <link href="{{ site.url }}/atom.xml" rel="self"/>
-  <link href="{{ site.url }}/"/>
+  <link href="{{ site.url }}{{ site.baseurl }}/atom.xml" rel="self"/>
+  <link href="{{ site.url }}{{ site.baseurl }}/"/>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
-  <id>{{ site.url }}/</id>
+  <id>{{ site.url }}{{ site.baseurl }}/</id>
   <author>
-    <name><![CDATA[{{ site.author | strip_html }}]]></name>
-    {% if site.email %}<email><![CDATA[{{ site.email }}]]></email>{% endif %}
+    <name><![CDATA[{{ site.author.name | strip_html }}]]></name>
+    {% if site.author.email %}<email><![CDATA[{{ site.author.email }}]]></email>{% endif %}
   </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+  <generator uri="http://getjpress.org/">JPress</generator>
 
   {% for post in site.posts limit: 20 %}
   <entry>
     <title type="html"><![CDATA[{{ post.title | cdata_escape }}]]></title>
-    <link href="{{ site.url }}{{ post.url }}"/>
+    <link href="{{ site.url }}{{ site.baseurl }}{{ post.url }}"/>
     <updated>{{ post.date | date_to_xmlschema }}</updated>
-    <id>{{ site.url }}{{ post.id }}</id>
+    <id>{{ site.url }}{{ site.baseurl }}{{ post.id }}</id>
     <content type="html"><![CDATA[{{ post.content | expand_urls: site.url | cdata_escape }}]]></content>
   </entry>
   {% endfor %}
