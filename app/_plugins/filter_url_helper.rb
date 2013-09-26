@@ -21,6 +21,11 @@ module Jekyll
       baseurl = @context.registers[:site].config['baseurl']
     end
 
+    # Internal: Get the 'assetsurl' variable value from _config.yml.
+    def get_assetsurl
+      assetsurl = @context.registers[:site].config['assetsurl']
+    end
+
     # The to_ methods transform a root-relative path into the path
     # type of the method name: to_<type>url.
 
@@ -36,6 +41,13 @@ module Jekyll
 
       # url + baseurl << input
       input = "#{get_url}#{get_baseurl}#{input}"
+    end
+
+    # Public: Append the 'assetsurl' variable to 'input'.
+    def to_assetsurl(input)
+
+      # baseurl + assetsurl << input
+      input = "#{get_baseurl}#{get_assetsurl}#{input}"
     end
 
     # Public: Sanitize a string for use in a URL.
