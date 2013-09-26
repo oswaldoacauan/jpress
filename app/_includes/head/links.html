@@ -13,11 +13,11 @@
   {% assign next_title = page.next.title %}
   {% assign next_url = page.next.url %}
 {% endif %}
-<link rel="canonical" href="{{ site.url }}{{ page.url }}">
-<link rel="start" href="{{ site.baseurl }}/" title="{{ site.title }}">
+<link rel="canonical" href="{{ page.url | to_absurl }}">
+<link rel="start" href="{{ '/' | to_baseurl }}" title="{{ site.title }}">
 {% if prev_url %}
-  <link rel="prev" href="{{ site.baseurl }}{{ prev_url }}" title="{{ prev_title }}">
+  <link rel="prev" href="{{ prev_url | to_baseurl }}" title="{{ prev_title }}">
 {% endif %}
 {% if next_url %}
-  <link rel="next" href="{{ site.baseurl }}{{ next_url }}" title="{{ next_title }}">
+  <link rel="next" href="{{ next_url | to_baseurl }}" title="{{ next_title }}">
 {% endif %}

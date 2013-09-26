@@ -20,7 +20,8 @@ url: http://getjpress.com
 # Jekyll configs
 # ===========================
 
-# The number should be the maximum number of Posts you’d like to be displayed per- page in the generated site.
+# The number should be the maximum number of Posts
+# you’d like to be displayed per- page in the generated site.
 paginate: 1
 
 # Page path style
@@ -30,6 +31,13 @@ paginate_path: '/page/:num'
 # else leave it empty. Remember to change 'baseurl' on '_config.build.yml'
 # before run the build task
 baseurl:
+
+# If publishing your assets to a subdirectory as
+# in http://site.com/project/assets/js/app.js set '/assets'
+# else leave it empty.
+# JPress will append this to all url assets.
+# E.g. /css/app.css -> baseurl + assetsurl + /css/app.css
+assetsurl:
 
 # Destination folder, dont forget to change on Gruntfile.js too!
 destination: ./dist
@@ -71,7 +79,7 @@ pygments: true
 # JPress configs
 # ===========================
 
-# Enable titlecase. Ex: 'This is an awesome post' -> 'This is an Awesome Post'
+# Enable titlecase. e.g. 'This is an awesome post' -> 'This is an Awesome Post'
 titlecase: true
 
 # Enable OpenGraph tags

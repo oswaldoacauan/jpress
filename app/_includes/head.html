@@ -25,20 +25,20 @@
 
 {% include head/meta-tags.html %}
 
-<link href="{{ site.baseurl }}/atom.xml" rel="alternate" title="{{site.title}}" type="application/atom+xml">
+<link href="{{ '/atom.xml' | to_baseurl }}" rel="alternate" title="{{site.title}}" type="application/atom+xml">
 <link href="//fonts.googleapis.com" rel="dns-prefetch">
 <link href="//ajax.googleapis.com" rel="dns-prefetch">
-<link href="{{ site.baseurl }}/humans.txt" rel="author" type="text/plain">
+<link href="{{ '/humans.txt' | to_baseurl }}" rel="author" type="text/plain">
 
 {% include head/links.html %}
 
-<!-- build:css({app,.tmp}) {{ site.baseurl }}/css/main.css -->
-<link rel="stylesheet" href="{{ site.baseurl }}/css/syntax.css">
-<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
+<!-- build:css({app,.tmp}) {{ '/css/main.css' | to_assetsurl }} -->
+<link rel="stylesheet" href="{{ '/css/syntax.css' | to_assetsurl }}">
+<link rel="stylesheet" href="{{ '/css/main.css' | to_assetsurl }}">
 <!-- endbuild -->
 
-<!-- build:js {{ site.baseurl }}/js/head-scripts.js -->
-<script src="{{ site.baseurl }}/_bower_components/modernizr/modernizr.js"></script>
+<!-- build:js {{ '/js/head-scripts.js' | to_assetsurl }} -->
+<script src="/_bower_components/modernizr/modernizr.js"></script>
 <!-- endbuild -->
 
 {% include custom/head.html %}
