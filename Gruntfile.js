@@ -136,15 +136,19 @@ module.exports = function (grunt) {
         httpImagesPath: '/image',
         httpGeneratedImagesPath: '/image/generated',
         outputStyle: 'expanded',
-        raw: 'asset_cache_buster :none \nextensions_dir = "<%= jpress.app %>/_bower_components\n'
+        raw: 'asset_cache_buster :none \nextensions_dir = "<%= jpress.app %>/_bower_components"\n'
       },
       dist: {
         options: {
+          environment: 'production',
+          noLineComments: true,
+          outputStyle: 'compressed',
           generatedImagesDir: '<%= jpress.dist %>/image/generated'
         }
       },
       server: {
         options: {
+          trace: true,
           debugInfo: true,
           generatedImagesDir: '.tmp/image/generated'
         }
@@ -152,23 +156,19 @@ module.exports = function (grunt) {
     },
     autoprefixer: {
       options: {
-        browsers: ['last 2 versions']
+        browsers: ['last 2 version', 'ie 8', "> 1%"]
       },
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= jpress.dist %>/css',
-          src: '**/*.css',
-          dest: '<%= jpress.dist %>/css'
-        }]
+        expand: true,
+        flatten: true,
+        src: '<%= jpress.dist %>/css/**/*.css',
+        dest: '<%= jpress.dist %>/css'
       },
       server: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/css',
-          src: '**/*.css',
-          dest: '.tmp/css'
-        }]
+        expand: true,
+        cwd: '.tmp/css',
+        src: '.tmp/css/**/*.css',
+        dest: '.tmp/css'
       }
     },
     jekyll: {
