@@ -1,5 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/oswaldoacauan/jpress.png?label=ready)](https://waffle.io/oswaldoacauan/jpress)  
-JPress [![Build Status](https://travis-ci.org/oswaldoacauan/jpress.png)](https://travis-ci.org/oswaldoacauan/jpress) [![devDependency Status](https://david-dm.org/oswaldoacauan/jpress/dev-status.png)](https://david-dm.org/oswaldoacauan/jpress#info=devDependencies)
+JPress [![Build Status](https://travis-ci.org/oswaldoacauan/jpress.png)](https://travis-ci.org/oswaldoacauan/jpress) [![devDependency Status](https://david-dm.org/oswaldoacauan/jpress/dev-status.png)](https://david-dm.org/oswaldoacauan/jpress#info=devDependencies)[![Stories in Ready](https://badge.waffle.io/oswaldoacauan/jpress.png?label=ready)](https://waffle.io/oswaldoacauan/jpress)  
 ======
 A [Jekyll](jekyllrb.com) Boilerplate for blogs and pages.
 
