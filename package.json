@@ -55,6 +55,7 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "grunt test --verbose"
+    "test": "grunt build --verbose",
+    "postinstall": "bower install; bundle install;"
   }
 }
