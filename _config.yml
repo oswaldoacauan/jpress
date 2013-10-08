@@ -25,7 +25,7 @@ url: http://getjpress.com
 paginate: 1
 
 # Page path style
-paginate_path: '/page/:num'
+paginate_path: '/blog/page/:num'
 
 # If publishing to a subdirectory as in http://site.com/project set '/project'
 # else leave it empty. Remember to change 'baseurl' on '_config.build.yml'
@@ -37,7 +37,7 @@ baseurl:
 # else leave it empty.
 # JPress will append this to all url assets.
 # E.g. /css/app.css -> baseurl + assetsurl + /css/app.css
-assetsurl:
+assetsurl: /assets
 
 # Destination folder, dont forget to change on Gruntfile.js too!
 destination: ./dist
@@ -55,7 +55,7 @@ include: ['.htaccess']
 # date  /:categories/:year/:month/:day/:title.html
 # pretty  /:categories/:year/:month/:day/:title/
 # none  /:categories/:title.html
-permalink: /:title/
+permalink: /blog/:title/
 
 # Publish posts with future date.
 # _config.build.yml sets this to false on `grunt build`

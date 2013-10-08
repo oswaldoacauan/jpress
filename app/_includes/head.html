@@ -32,13 +32,13 @@
 
 {% include head/links.html %}
 
-<!-- build:css({app,.tmp}) {{ '/css/main.css' | to_assetsurl }} -->
+<!-- build:css({app,.tmp}) {{ site.assetsurl }}/css/main.css -->
 <link rel="stylesheet" href="{{ '/css/syntax.css' | to_assetsurl }}">
 <link rel="stylesheet" href="{{ '/css/main.css' | to_assetsurl }}">
 <!-- endbuild -->
 
-<!-- build:js {{ '/js/head-scripts.js' | to_assetsurl }} -->
-<script src="/_bower_components/modernizr/modernizr.js"></script>
+<!-- build:js {{ site.assetsurl }}/js/head-scripts.js -->
+<script src="{{ '/_components/modernizr/modernizr.js' | to_assetsurl }}"></script>
 <!-- endbuild -->
 
 {% include custom/head.html %}

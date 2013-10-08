@@ -1,7 +1,22 @@
 {
-  "name": "jpress",
+  "name": "JPress",
   "version": "0.0.1",
   "dependencies": {
-    "modernizr": "~2.6.2"
-  }
+    "modernizr": "~2.6.2",
+    "jquery": "~2.0.3"
+  },
+  "homepage": "http://getjpress.com",
+  "authors": [
+    "Oswaldo Acauan <hello@oswaldoacauan.com>"
+  ],
+  "description": "JPress a Jekyll Boilerplate for blogs and pages",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "app/assets/_components",
+    "test",
+    "tests"
+  ]
 }

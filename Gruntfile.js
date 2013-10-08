@@ -6,13 +6,22 @@ var mountFolder = function (connect, dir) {
 };
 var config = {
   app: 'app',
-  dist: 'dist'
+  dist: 'dist',
+  assets: 'assets',
+  bower: '_components'
 };
+
+if(typeof config.assets === 'string' && config.assets.length > 0) {
+  config.assetsPath = config.app + '/' + config.assets;
+}
 
 /**
  *
  * Directory reference
  * ======================
+ *
+ * assets: assets
+ * bower: _components
  * css: css
  * compass: _scss
  * javascript: js
@@ -39,17 +48,17 @@ module.exports = function (grunt) {
     },
     watch: {
       compass: {
-        files: ['<%= jpress.app %>/_scss/**/*.{scss,sass}'],
+        files: ['<%= jpress.app %>/<%= jpress.assets %>/_scss/**/*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer:server']
       },
       prefixCss: {
-        files: ['<%= jpress.app %>/css/**/*.css'],
+        files: ['<%= jpress.app %>/<%= jpress.assets %>/css/**/*.css'],
         tasks: ['copy:stageCss', 'autoprefixer:server']
       },
       jekyll: {
         files: ['<%= jpress.app %>/**/*.{html,yml,md,mkd,markdown}',
                 '_config.yml',
-                '!<%= jpress.app %>/_bower_components'],
+                '!<%= jpress.app %>/<%= jpress.assets %>/<%= jpress.bower %>'],
         tasks: ['jekyll:server']
       },
       livereload: {
@@ -57,10 +66,7 @@ module.exports = function (grunt) {
           livereload: LIVERELOAD_PORT
         },
         files: [
-          '.jekyll/**/*.html',
-          '.tmp/css/**/*.css',
-          '{.tmp,<%= jpress.app %>}/<%= js %>/**/*.js',
-          '<%= jpress.app %>/image/**/*.{gif,jpg,jpeg,png,svg,webp}'
+          '{.tmp,<%= jpress.app %>}/**/*.{html,css,js,gif,jpg,jpeg,png,svg,webp}'
         ]
       }
     },
@@ -78,16 +84,6 @@ module.exports = function (grunt) {
               mountFolder(connect, '.tmp'),
               mountFolder(connect, '.jekyll'),
               mountFolder(connect, config.app)
-            ];
-          }
-        }
-      },
-      test: {
-        options: {
-          middleware: function (connect) {
-            return [
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'test')
             ];
           }
         }
@@ -127,30 +123,30 @@ module.exports = function (grunt) {
         // If you're using global Sass gems, require them here, e.g.:
         // require: ['singularity', 'jacket'],
         bundleExec: true,
-        sassDir: '<%= jpress.app %>/_scss',
-        cssDir: '.tmp/css',
-        imagesDir: '<%= jpress.app %>/image',
-        fontsDir: '<%= jpress.app %>/fonts',
-        javascriptsDir: '<%= jpress.app %>/js',
+        sassDir: '<%= jpress.app %>/<%= jpress.assets %>/_scss',
+        cssDir: '.tmp/<%= jpress.assets %>/css',
+        imagesDir: '<%= jpress.app %>/<%= jpress.assets %>/image',
+        fontsDir: '<%= jpress.app %>/<%= jpress.assets %>/fonts',
+        javascriptsDir: '<%= jpress.app %>/<%= jpress.assets %>/js',
         relativeAssets: false,
-        httpImagesPath: '/image',
-        httpGeneratedImagesPath: '/image/generated',
+        httpImagesPath: '<%= jpress.app %>/<%= jpress.assets %>/image',
+        httpGeneratedImagesPath: '<%= jpress.app %>/<%= jpress.assets %>/image/generated',
         outputStyle: 'expanded',
-        raw: 'asset_cache_buster :none \nextensions_dir = "<%= jpress.app %>/_bower_components"\n'
+        raw: 'asset_cache_buster :none \nextensions_dir = "<%= jpress.app %>/<%= jpress.assets %>/<%= jpress.bower %>"\n'
       },
       dist: {
         options: {
           environment: 'production',
           noLineComments: true,
           outputStyle: 'compressed',
-          generatedImagesDir: '<%= jpress.dist %>/image/generated'
+          generatedImagesDir: '<%= jpress.dist %>/<%= jpress.assets %>/image/generated'
         }
       },
       server: {
         options: {
           trace: true,
           debugInfo: true,
-          generatedImagesDir: '.tmp/image/generated'
+          generatedImagesDir: '.tmp/<%= jpress.assets %>/image/generated'
         }
       }
     },
@@ -161,14 +157,14 @@ module.exports = function (grunt) {
       dist: {
         expand: true,
         flatten: true,
-        src: '<%= jpress.dist %>/css/**/*.css',
-        dest: '<%= jpress.dist %>/css'
+        src: '<%= jpress.dist %>/<%= jpress.assets %>/css/**/*.css',
+        dest: '<%= jpress.dist %>/<%= jpress.assets %>/css'
       },
       server: {
         expand: true,
-        cwd: '.tmp/css',
-        src: '.tmp/css/**/*.css',
-        dest: '.tmp/css'
+        cwd: '.tmp/<%= jpress.assets %>/css',
+        src: '.tmp/<%= jpress.assets %>/css/**/*.css',
+        dest: '.tmp/<%= jpress.assets %>/css'
       }
     },
     jekyll: {
@@ -195,14 +191,11 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '{.tmp,<%= jpress.app %>}/js/**/*.js',
-        'test/spec/**/*.js',
-        '!<%= jpress.app %>/js/vendor/**/*',
-        '!<%= jpress.app %>/_bower_components/**/*'
+        '{.tmp,<%= jpress.app %>}/<%= jpress.assets %>/js/**/*.js',
+        '!<%= jpress.app %>/<%= jpress.assets %>/<%= jpress.bower %>/**/*'
       ],
       report: [
-        '{.tmp,<%= jpress.app %>}/js/**/*.js',
-        '!<%= jpress.app %>/js/vendor/**/*'
+        '{.tmp,<%= jpress.app %>}/<%= jpress.assets %>/js/**/*.js'
       ]
     },
     csscss: {
@@ -217,8 +210,8 @@ module.exports = function (grunt) {
       },
       // Add files to be tested here
       report: {
-       src: ['<%= jpress.app %>/css/**/*.css',
-             '<%= jpress.app %>/_scss/**/*.scss']
+       src: ['<%= jpress.app %>/<%= jpress.assets %>/css/**/*.css',
+             '<%= jpress.app %>/<%= jpress.assets %>/_scss/**/*.{scss,sass}']
       }
     },
     csslint: {
@@ -226,7 +219,7 @@ module.exports = function (grunt) {
         csslintrc: '.csslintrc'
       },
       report: {
-        src: ['{.tmp,<%= jpress.app %>}/css/**/*.css']
+        src: ['{.tmp,<%= jpress.app %>}/<%= jpress.assets %>/css/**/*.css']
       }
     },
     // UseminPrepare will only scan one page for usemin blocks. If you have
@@ -244,7 +237,7 @@ module.exports = function (grunt) {
           dirs: ['<%= jpress.dist %>/**/*']
       },
       html: ['<%= jpress.dist %>/**/*.html'],
-      css: ['<%= jpress.dist %>/css/**/*.css']
+      css: ['<%= jpress.dist %>/<%= jpress.assets %>/css/**/*.css']
     },
     htmlmin: {
       dist: {
@@ -331,11 +324,11 @@ module.exports = function (grunt) {
             // files with concat. Add other files and patterns your site
             // reqires for distrobution here, e.g., Bower components that
             // aren't in a usemin block.
-            '_bower_components/jquery.min.js',
+            '<%= jpress.assets %>/<%= jpress.bower %>/jquery.min.js',
             // Copy moves asset files and directories
             '*.{ico,png}',
-            'image/**/*',
-            'fonts/**/*'
+            '<%= jpress.assets %>/image/**/*',
+            '<%= jpress.assets %>/fonts/**/*'
           ],
           dest: '<%= jpress.dist %>'
         }]
@@ -345,9 +338,9 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= jpress.app %>/css',
+          cwd: '<%= jpress.app %>/<%= jpress.assets %>/css',
           src: '**/*.css',
-          dest: '.tmp/css'
+          dest: '.tmp/<%= jpress.assets %>/css'
         }]
       }
     },
@@ -358,10 +351,10 @@ module.exports = function (grunt) {
       dist: {
         files: {
           src: [
-            '<%= jpress.dist %>/js/**/*.js',
-            '<%= jpress.dist %>/css/**/*.css',
-            '<%= jpress.dist %>/image/**/*.{gif,jpg,jpeg,png,svg,webp}',
-            '<%= jpress.dist %>/fonts/**/*.{eot*,svg,ttf,woff}'
+            '<%= jpress.dist %>/<%= jpress.assets %>/js/**/*.js',
+            '<%= jpress.dist %>/<%= jpress.assets %>/css/**/*.css',
+            '<%= jpress.dist %>/<%= jpress.assets %>/image/**/*.{gif,jpg,jpeg,png,svg,webp}',
+            '<%= jpress.dist %>/<%= jpress.assets %>/fonts/**/*.{eot*,svg,ttf,woff}'
           ]
         }
       }
@@ -427,10 +420,5 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'report',
     'build'
-  ]);
-
-  grunt.registerTask('test', [
-    'report',
-    'jekyll:dist'
   ]);
 };
